@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "media_appearances",
+  "info": {
+    "singularName": "media-appearance",
+    "pluralName": "media-appearances",
+    "displayName": "Media Appearance",
+    "description": "Interviews, press coverage, and video appearances, including the homepage Recent Appearances"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "appearanceType": {
+      "type": "enumeration",
+      "enum": ["News", "Video", "Podcast", "Interview"],
+      "default": "News"
+    },
+    "date": { "type": "date" },
+    "excerpt": { "type": "text" },
+    "externalUrl": { "type": "string" },
+    "section": {
+      "type": "enumeration",
+      "enum": ["media-conversations", "in-the-news"],
+      "required": true
+    },
+    "featuredOnHome": { "type": "boolean", "default": false },
+    "homeOrder": { "type": "integer", "default": 0 }
+  }
+}

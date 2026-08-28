@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "profile",
+  "info": {
+    "singularName": "profile",
+    "pluralName": "profiles",
+    "displayName": "Profile",
+    "description": "Site-wide bio, hero, and contact content editable without a code change"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroEyebrow": { "type": "string" },
+    "heroTitleLine1": { "type": "string" },
+    "heroTitleAccent": { "type": "string" },
+    "roles": { "type": "json" },
+    "heroLede": { "type": "text" },
+    "bridgeEyebrow": { "type": "string" },
+    "bridgeTitle": { "type": "string" },
+    "bridgeBody1": { "type": "richtext" },
+    "bridgeBody2": { "type": "richtext" },
+    "ctaTitle": { "type": "string" },
+    "ctaSub": { "type": "string" },
+    "contactEmail": { "type": "string" },
+    "socialLinkedin": { "type": "string" },
+    "socialX": { "type": "string" },
+    "socialResearchGate": { "type": "string" },
+    "socialGoogleScholar": { "type": "string" },
+    "portrait": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "communityPhoto": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "kigaliPhoto": { "type": "media", "multiple": false, "allowedTypes": ["images"] }
+  }
+}

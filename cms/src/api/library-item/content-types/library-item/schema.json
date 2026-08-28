@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "library_items",
+  "info": {
+    "singularName": "library-item",
+    "pluralName": "library-items",
+    "displayName": "Library Item",
+    "description": "Books, reports, and intellectual influences for the From My Library page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "author": { "type": "string" },
+    "category": {
+      "type": "enumeration",
+      "enum": ["Book", "Report"],
+      "default": "Book"
+    },
+    "description": { "type": "text" },
+    "link": { "type": "string" },
+    "order": { "type": "integer", "default": 0 }
+  }
+}

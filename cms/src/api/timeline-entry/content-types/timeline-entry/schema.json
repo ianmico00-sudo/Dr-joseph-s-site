@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "timeline_entries",
+  "info": {
+    "singularName": "timeline-entry",
+    "pluralName": "timeline-entries",
+    "displayName": "Timeline Entry",
+    "description": "Career timeline entries for the homepage Impact Journey section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tag": { "type": "string" },
+    "title": { "type": "string", "required": true },
+    "description": { "type": "text" },
+    "order": { "type": "integer", "default": 0 }
+  }
+}
