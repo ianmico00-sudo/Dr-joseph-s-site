@@ -1,0 +1,16 @@
+# Serve the React single-page app on Apache/LiteSpeed (cPanel).
+# Without this, refreshing or directly opening any page other than "/"
+# (e.g. /about, /contact) returns a 404 from the server instead of
+# letting the React app handle the route.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Let real files and folders (JS, CSS, images) be served normally
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Everything else falls through to index.html, where React Router takes over
+  RewriteRule . /index.html [L]
+</IfModule>
