@@ -21,21 +21,43 @@ const deniedTypes = [
   'application/x-mach-binary',
 ];
 
-module.exports = () => ({
-  'users-permissions': {
-    config: {
-      jwtManagement: 'refresh',
-      sessions: {
-        httpOnly: true,
+module.exports = ({ env }) => {
+  // If Cloudinary credentials are set (production/Render), store uploads there —
+  // Render's free web service has no persistent disk, so anything saved locally
+  // is wiped on every restart/redeploy. Without those env vars (local dev), Strapi
+  // falls back to its default local-disk provider automatically.
+  const cloudinaryConfigured = Boolean(env('CLOUDINARY_NAME'));
+
+  return {
+    'users-permissions': {
+      config: {
+        jwtManagement: 'refresh',
+        sessions: {
+          httpOnly: true,
+        },
       },
     },
-  },
-  upload: {
-    config: {
-      security: {
-        allowedTypes: allowedMediaTypes,
-        deniedTypes,
+    upload: {
+      config: {
+        ...(cloudinaryConfigured
+          ? {
+              provider: 'cloudinary',
+              providerOptions: {
+                cloud_name: env('CLOUDINARY_NAME'),
+                api_key: env('CLOUDINARY_KEY'),
+                api_secret: env('CLOUDINARY_SECRET'),
+              },
+              actionOptions: {
+                upload: {},
+                delete: {},
+              },
+            }
+          : {}),
+        security: {
+          allowedTypes: allowedMediaTypes,
+          deniedTypes,
+        },
       },
     },
-  },
-});
+  };
+};
