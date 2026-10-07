@@ -1,0 +1,26 @@
+---
+title: Harnessing the Demographic Dividend Through the Lenses of Youth
+section: insights
+tag: Youth & Values
+date: '2017-12-19'
+readTime: 4
+excerpt: >-
+  Africa's population is projected to grow to 2.5 billion by 2050. If harnessed
+  through education, mentorship and employment, this demographic shift can
+  accelerate growth; if ignored, it risks instability.
+sourceUrl: >-
+  https://drryarasa.wordpress.com/2017/12/19/harnessing-demographic-dividend-through-the-lenses-of-youth/
+---
+Africa's population is projected to grow to 2.5 billion by 2050, adding more people than any other region in the world. While this can be an indicator to many opportunities, there is a risk that increased population pressure may increase youth un- and underemployment in cities and rural areas, which can trigger political instability. However, if harnessed, it can accelerate economic growth due to the resources gained and could allow for critical growth leaps.
+
+Most African countries are a signatory to the 2013 Addis Ababa Declaration on Population and Development in Africa Beyond 2014, under the theme Harnessing the Demographic Dividend: The Future We Want for Africa. The declaration recognises the role of population dynamics in socio-economic transformation and seeks to unleash the full potential of the youth to boost socio-economic development. The declaration came a few years after African leaders passed a decision at their meeting in January 2010, to 'promote youth volunteerism' as a key enabler for youth empowerment and accelerating development on the continent. The notion of volunteerism was said to bring people together to share skills, knowledge and talent that can be directed towards a greater cause such us achieving Agenda 2063. Based on free will and own volition, the level of motivation, passion and energy, volunteerism is second to none when it comes to galvanizing human capital for a common cause – the leaders noted.
+
+All this seems to show that youth have been placed at the epicentre of the continent's development, however, different studies have indicated that youth continue to grapple with lack of mentors, conflicts they have been forced to be part of and poverty, all which affect the way in which youth participate in electoral, economic and social processes which poses a great risk to the continent today and in the future. Youth make up the largest constituency in Africa and if they are allowed to use the power in their numbers through participation in all processes, youth can respond to and influence the direction of peaceful electoral processes, human rights issues, unemployment, education and skills, and empowerment of minority groups in societies.
+
+The importance of the youth as the future of the African continent has long been identified and various mechanisms have been put in place, from policies, charters, constitutions, ministries, departments and it has been argued that the responsibility is on the present leaders to harness this important constituency for the future good of the continent. I can draw one example of the African Youth Charter that recognises and upholds the unequivocal right of every young person to participate in all spheres of society-political, economic and social. It has been often noted that the values, attitudes and skills acquired by today's youth will influence the course of the current events and shape the future. So the question is, how are the young people going to be motivated and empowered to drive change in their small communities?
+
+The lack of mentors exposes the frays in our community fabric. As we encourage our young people to have more positive visions of themselves and their futures, we need to give them what to emulate. Unless the elders (especially those in the spot light), walk the talk, we risk losing the generation that is holding our future in its hands. The elders wage wars and force the youth to fire bullets, elders lead demonstrations and put youth at the forefront, elders start corruption and teach the young ones to do the same. In today's culture, where reality is scripted for television and violence is part of video games or even cartoons, finding a meaningful role model/mentor is more important than ever.
+
+The pressing need for a quality education. There is need for an increase in the number of schools, high quality teaching materials and trained teachers to improve quality of education and progression from primary to secondary and tertiary institutions. This could include decentralising the education sector to enhance ownership and oversight by communities, reform the curriculum and teaching methods to incorporate technical, innovation, problem solving, and entrepreneurship skills in formal curriculum and so much more. A quality education breeds quality opportunities and it can act as a remedy to unemployment, poverty, conflicts and even diseases.
+
+The demographic dividend is neither automatic nor guaranteed; countries must earn it by implementing policies that will not only accelerate rapid fertility decline, but also ensure that the resulting surplus labour force is well educated, skilled, healthy and economically engaged. Having quality human capital is key to optimising productivity and the associated socio-economic benefits that a country can harness from the demographic transition.

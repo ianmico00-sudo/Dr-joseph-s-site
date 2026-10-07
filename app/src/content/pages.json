@@ -1,0 +1,45 @@
+{
+  "insights": {
+    "eyebrow": "Insights",
+    "title": "Shorter pieces that respond to public issues, events, and emerging discussions.",
+    "lede": "Commentary on current events and public debates, reflections on social and economic issues, and observations on public service delivery and civic life."
+  },
+  "analysis": {
+    "eyebrow": "Analysis",
+    "title": "Structured, in-depth work on systems, law, and policy.",
+    "lede": "In-depth policy and institutional analysis, legal and regulatory frameworks, service delivery systems, and how governance is translated into outcomes in practice."
+  },
+  "reflections": {
+    "eyebrow": "Reflections",
+    "title": "Short, self-contained ideas expressed in simple and direct form.",
+    "lede": "Brief observations drawn from experience and reading, core ideas that recur across different areas of work, and simple notes that stand on their own."
+  },
+  "media": {
+    "eyebrow": "Media and Conversations",
+    "title": "Interviews, panels, and public discussions.",
+    "lede": "Video interviews and talks, panel and conference appearances, and social media posts — collected here as a living record of public engagement."
+  },
+  "news": {
+    "eyebrow": "In the News",
+    "title": "External coverage and press stories.",
+    "lede": "News articles about the work, profiles written in media outlets, reports referencing ideas and statements, and external commentary discussing the work."
+  },
+  "library": {
+    "eyebrow": "From My Library",
+    "title": "The intellectual materials that shape the thinking.",
+    "lede": "Books frequently referenced, articles and reports that inform the perspective, and authors and thinkers that shape the work."
+  },
+  "contact": {
+    "eyebrow": "Contact and Engagement",
+    "title": "Let's work together.",
+    "lede": "For speaking invitations, media requests, collaboration opportunities, or general contact. Select the purpose of your inquiry so it reaches the right place.",
+    "purposes": [
+      "Speaking Invitation",
+      "Governance Strategy",
+      "Media Request",
+      "Medical Consultation",
+      "Collaboration",
+      "General"
+    ]
+  }
+}

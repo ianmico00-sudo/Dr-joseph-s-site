@@ -1,0 +1,133 @@
+{
+  "hero": {
+    "eyebrow": "Peacebuilder · Public Health Advocate · Executive Director, Never Again Rwanda",
+    "nameLine1": "Dr. Joseph",
+    "nameLine2": "Ryarasa",
+    "nameAccent": "Nkurunziza",
+    "roles": [
+      "Medical Doctor",
+      "Public Health Practitioner",
+      "Human Rights Advocate",
+      "Peacebuilder"
+    ],
+    "lede": "A medical doctor and public health practitioner who has bridged the gap between healthcare and social justice — applying clinical leadership to champion good governance, human rights, and accountability as essential pillars of a healthier public.",
+    "portrait": "/uploads/portrait.jpg",
+    "portraitCaption": "Kigali · Rwanda"
+  },
+  "bridge": {
+    "eyebrow": "The Bridge",
+    "title": "From treating the body to healing the body politic.",
+    "paragraphs": [
+      "Dr. Joseph Ryarasa Nkurunziza, MD, is a medical doctor, public health practitioner and social justice activist with over 15 years of experience. He earned his medical degree from the National University of Rwanda. His clinical career spanned HIV care and treatment — as an HIV clinician at the Rwanda Military Hospital, Clinical Service Director at Drew Cares International, and Clinical Services Specialist with the DoD HIV/AIDS Prevention Program and the US Embassy in Rwanda. He also served as Health Coordinator for the Millennium Village Project with the Earth Institute at Columbia University.",
+      "He is the co-founder and Executive Director of Never Again Rwanda, a peacebuilding and social justice organization founded in 2002 in response to the 1994 Genocide against the Tutsi. He also serves as President of the African Democracy Forum, Chairperson of the Rwanda Civil Society Platform, and co-founder of the Health Development Initiative. Through this work he recognized that clinical care alone cannot fix health inequities without addressing underlying structural issues — and now champions good governance, human rights, and accountability as foundations of a healthier public."
+    ]
+  },
+  "explore": {
+    "eyebrow": "Explore the site",
+    "title": "A clearer path to",
+    "accent": "every section.",
+    "lede": "The work spans writing, analysis, and public engagement. Each section holds a distinct purpose — from short commentary to in-depth policy analysis and the books that shape the thinking behind it all.",
+    "items": [
+      {
+        "title": "Insights",
+        "text": "Short commentary on public issues, civic debate, and service delivery.",
+        "link": "/insights"
+      },
+      {
+        "title": "Analysis",
+        "text": "In-depth work on systems, law, policy, and governance implementation.",
+        "link": "/analysis"
+      },
+      {
+        "title": "Reflections",
+        "text": "Brief, self-contained ideas and observations drawn from experience.",
+        "link": "/reflections"
+      },
+      {
+        "title": "Media & Conversations",
+        "text": "Interviews, panels, and public discussions.",
+        "link": "/media"
+      },
+      {
+        "title": "In the News",
+        "text": "External coverage, profiles, and press stories.",
+        "link": "/in-the-news"
+      },
+      {
+        "title": "From My Library",
+        "text": "Books, reports, and intellectual influences.",
+        "link": "/library"
+      }
+    ]
+  },
+  "featured": {
+    "eyebrow": "Featured Writings",
+    "title": "Selected",
+    "accent": "pieces."
+  },
+  "pillars": {
+    "eyebrow": "Pillars of Impact",
+    "title": "Where clinical practice meets",
+    "accent": "social justice.",
+    "items": [
+      {
+        "title": "Public Health",
+        "text": "HIV/AIDS care, health systems, and universal coverage in low-resource settings."
+      },
+      {
+        "title": "Good Governance",
+        "text": "Accountability, decentralization, and citizen-centred service delivery."
+      },
+      {
+        "title": "Human Rights",
+        "text": "Civic space, dignity, and the protection of vulnerable populations."
+      },
+      {
+        "title": "Peacebuilding",
+        "text": "Reconciliation, social cohesion, and youth engagement in governance."
+      }
+    ]
+  },
+  "journey": {
+    "eyebrow": "Impact Journey",
+    "title": "A career of",
+    "accent": "synthesis.",
+    "lede": "The path from medical degree to governance leadership — and the realisation that health inequities cannot be solved in the clinic alone.",
+    "image": "/uploads/community.jpg",
+    "imageAlt": "Community engagement",
+    "steps": [
+      {
+        "when": "Medical Degree",
+        "title": "National University of Rwanda — MD",
+        "text": "Graduated as a medical doctor, followed by postgraduate training in public health and HIV/AIDS care at the University of Roehampton, Antwerp, and UC San Diego."
+      },
+      {
+        "when": "2002 — Present",
+        "title": "Co-founder & Executive Director, Never Again Rwanda",
+        "text": "A peacebuilding and social justice organization founded in response to the 1994 Genocide against the Tutsi."
+      },
+      {
+        "when": "2008 — 2016",
+        "title": "Clinical Leadership",
+        "text": "HIV clinician at the Rwanda Military Hospital; Clinical Service Director, Drew Cares International; Clinical Services Specialist, DoD HIV/AIDS Prevention Program & US Embassy Rwanda; Health Coordinator, Earth Institute (Columbia University) Millennium Village Project."
+      },
+      {
+        "when": "2010",
+        "title": "JCI TOYP Award — Osaka, Japan",
+        "text": "Named one of the Ten Most Outstanding Young Persons of the World by Junior Chambers International."
+      }
+    ]
+  },
+  "appearances": {
+    "eyebrow": "Media & Conversations",
+    "title": "Recent",
+    "accent": "appearances."
+  },
+  "cta": {
+    "eyebrow": "Contact & Engagement",
+    "title": "Let’s work together to move health and justice forward.",
+    "lede": "For collaboration, speaking engagements, media inquiries, or academic partnerships.",
+    "button": "Send a Message",
+    "image": "/uploads/kigali-dusk.jpg"
+  }
+}

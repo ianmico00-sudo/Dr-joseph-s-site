@@ -1,0 +1,363 @@
+# Content editor settings (Sveltia CMS). The editor opens at /admin on the site.
+# Saving in the editor commits to the GitHub repository below, and the host
+# (Vercel) then rebuilds the site with the change.
+#
+# All paths are from the top of the repository, where this app sits in "app/".
+
+backend:
+  name: github
+  repo: ianmico00-sudo/Dr-joseph-s-site
+  branch: main
+  # Sign in with a GitHub access token; no separate login server is needed.
+  auth_methods: [token]
+
+app_title: Dr. Joseph Ryarasa Nkurunziza · Content editor
+
+# Photos uploaded in the editor are stored here and served from /uploads/…
+media_folder: app/public/uploads
+public_folder: /uploads
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    icon: article
+    description: Insights, Analysis and Reflections pieces. The three newest appear on the homepage.
+    folder: app/src/content/articles
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: '{{title}}'
+    summary: "{{title}} ({{date | date('D MMM YYYY')}})"
+    sortable_fields:
+      fields: [date, title, section]
+      default:
+        field: date
+        direction: descending
+    view_filters:
+      - { label: Insights, field: section, pattern: insights }
+      - { label: Analysis, field: section, pattern: analysis }
+      - { label: Reflections, field: section, pattern: reflections }
+    fields:
+      - { name: title, label: Title, widget: string }
+      - name: section
+        label: Section
+        widget: select
+        default: insights
+        options:
+          - { label: Insights, value: insights }
+          - { label: Analysis, value: analysis }
+          - { label: Reflections, value: reflections }
+      - { name: tag, label: Topic, widget: string, hint: 'Shown above the title and used for the filter buttons, e.g. Governance.' }
+      - { name: date, label: Date, widget: datetime, type: date, format: YYYY-MM-DD }
+      - { name: readTime, label: Reading time (minutes), widget: number, value_type: int, min: 1, default: 4 }
+      - { name: excerpt, label: Summary, widget: text, hint: 'One to three sentences shown on cards and under the title.' }
+      - { name: sourceUrl, label: Original source link, widget: string, required: false, hint: 'Optional. Adds a "View original source" link under the article.' }
+      - { name: body, label: Article text, widget: markdown }
+
+  - name: media
+    label: Media, news and library
+    icon: play_circle
+    files:
+      - name: media
+        label: Media and news items
+        file: app/src/content/media.json
+        fields:
+          - name: items
+            label: Items
+            label_singular: Item
+            widget: list
+            summary: '{{type}} · {{title}}'
+            fields:
+              - name: type
+                label: Where it appears
+                widget: select
+                options:
+                  - { label: 'Video (Media page)', value: video }
+                  - { label: 'Appearance or conversation (Media page)', value: appearance }
+                  - { label: 'Social post (Media page)', value: social }
+                  - { label: 'News coverage (In the News page)', value: news }
+              - { name: title, label: Title, widget: string }
+              - { name: description, label: Description, widget: text }
+              - { name: date, label: Date, widget: datetime, type: date, format: YYYY-MM-DD, required: false, hint: 'Dated items can appear under "Recent appearances" on the homepage.' }
+              - { name: outlet, label: Outlet or programme, widget: string, required: false }
+              - { name: category, label: Category, widget: string, required: false }
+              - { name: platform, label: Platform, widget: string, required: false, hint: 'e.g. YouTube, Instagram, Facebook, Web.' }
+              - { name: sourceUrl, label: Link, widget: string }
+              - { name: embedUrl, label: Video embed link, widget: string, required: false, hint: 'Videos only, e.g. https://www.youtube.com/embed/VIDEO_ID' }
+      - name: library
+        label: Library items
+        file: app/src/content/library.json
+        fields:
+          - name: items
+            label: Items
+            label_singular: Item
+            widget: list
+            summary: '{{title}}'
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: byline, label: Author and year, widget: string }
+              - { name: description, label: Description, widget: text }
+              - { name: url, label: Link, widget: string }
+
+  - name: pages
+    label: Page text and photos
+    icon: web
+    files:
+      - name: home
+        label: Home page
+        file: app/src/content/home.json
+        fields:
+          - name: hero
+            label: Top of page
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: nameLine1, label: Name line 1, widget: string }
+              - { name: nameLine2, label: Name line 2, widget: string }
+              - { name: nameAccent, label: Name line 3 (green), widget: string }
+              - { name: roles, label: Rotating roles, widget: list, field: { name: role, label: Role, widget: string } }
+              - { name: lede, label: Introduction, widget: text }
+              - { name: portrait, label: Portrait photo, widget: image }
+              - { name: portraitCaption, label: Photo caption, widget: string }
+          - name: bridge
+            label: The Bridge (biography)
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: paragraphs, label: Paragraphs, widget: list, field: { name: paragraph, label: Paragraph, widget: text } }
+          - name: explore
+            label: Explore the site
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: accent, label: Heading ending (green), widget: string }
+              - { name: lede, label: Introduction, widget: text }
+              - name: items
+                label: Cards
+                widget: list
+                summary: '{{title}}'
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: text, label: Text, widget: text }
+                  - { name: link, label: Page address, widget: string, hint: 'e.g. /insights' }
+          - name: featured
+            label: Featured Writings heading
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: accent, label: Heading ending (green), widget: string }
+          - name: pillars
+            label: Pillars of Impact
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: accent, label: Heading ending (green), widget: string }
+              - name: items
+                label: Pillars
+                widget: list
+                summary: '{{title}}'
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: text, label: Text, widget: text }
+          - name: journey
+            label: Impact Journey (timeline)
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: accent, label: Heading ending (green), widget: string }
+              - { name: lede, label: Introduction, widget: text }
+              - { name: image, label: Photo, widget: image }
+              - { name: imageAlt, label: Photo description, widget: string }
+              - name: steps
+                label: Timeline entries
+                widget: list
+                summary: '{{when}} · {{title}}'
+                fields:
+                  - { name: when, label: Period, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: text, label: Text, widget: text }
+          - name: appearances
+            label: Recent appearances heading
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: accent, label: Heading ending (green), widget: string }
+          - name: cta
+            label: Contact banner
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: lede, label: Text, widget: text }
+              - { name: button, label: Button text, widget: string }
+              - { name: image, label: Background photo, widget: image }
+
+      - name: about
+        label: About page
+        file: app/src/content/about.json
+        fields:
+          - name: hero
+            label: Top of page
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: titleStart, label: Heading (start), widget: string }
+              - { name: titleAccent, label: Heading (green word), widget: string }
+              - { name: titleEnd, label: Heading (end), widget: string }
+              - { name: portrait, label: Portrait photo, widget: image }
+          - { name: bio, label: Biography paragraphs, widget: list, field: { name: paragraph, label: Paragraph, widget: text } }
+          - { name: facts, label: Short facts under the biography, widget: list, field: { name: fact, label: Fact, widget: string } }
+          - name: roles
+            label: Current and past roles
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: accent, label: Heading ending (green), widget: string }
+              - name: items
+                label: Roles
+                widget: list
+                summary: '{{org}}'
+                fields:
+                  - { name: org, label: Organization, widget: string }
+                  - { name: role, label: Role, widget: string }
+                  - { name: text, label: Description, widget: text }
+          - name: awards
+            label: Awards and honours
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: accent, label: Heading ending (green), widget: string }
+              - name: items
+                label: Awards
+                widget: list
+                summary: '{{title}}'
+                fields:
+                  - { name: year, label: Year, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: text, label: Description, widget: text }
+          - name: education
+            label: Education
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: accent, label: Heading ending (green), widget: string }
+              - name: items
+                label: Qualifications
+                widget: list
+                summary: '{{school}}'
+                fields:
+                  - { name: school, label: Institution, widget: string }
+                  - { name: award, label: Qualification, widget: string }
+          - name: interests
+            label: Areas of interest
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: accent, label: Heading ending (green), widget: string }
+              - { name: items, label: Interests, widget: list, field: { name: interest, label: Interest, widget: string } }
+          - name: statement
+            label: Personal statement
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: quote, label: Quote, widget: text }
+              - { name: attribution, label: Name, widget: string }
+          - name: banner
+            label: Bottom banner
+            widget: object
+            fields:
+              - { name: title, label: Heading, widget: string }
+              - { name: button, label: Button text, widget: string }
+              - { name: image, label: Background photo, widget: image }
+
+      - name: pages
+        label: Other page introductions
+        file: app/src/content/pages.json
+        fields:
+          - name: insights
+            label: Insights
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: lede, label: Introduction, widget: text }
+          - name: analysis
+            label: Analysis
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: lede, label: Introduction, widget: text }
+          - name: reflections
+            label: Reflections
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: lede, label: Introduction, widget: text }
+          - name: media
+            label: Media & Conversations
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: lede, label: Introduction, widget: text }
+          - name: news
+            label: In the News
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: lede, label: Introduction, widget: text }
+          - name: library
+            label: From My Library
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: lede, label: Introduction, widget: text }
+          - name: contact
+            label: Contact & Engagement
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small heading, widget: string }
+              - { name: title, label: Heading, widget: string }
+              - { name: lede, label: Introduction, widget: text }
+              - { name: purposes, label: Purpose-of-inquiry options, widget: list, field: { name: purpose, label: Option, widget: string } }
+
+  - name: settings
+    label: Site details
+    icon: settings
+    files:
+      - name: site
+        label: Contact details and footer
+        file: app/src/content/site.json
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: tagline, label: Footer tagline, widget: string }
+          - { name: summary, label: Footer summary, widget: text }
+          - { name: email, label: Contact email, widget: string }
+          - { name: location, label: Location, widget: string }
+          - { name: availability, label: Availability note, widget: string }
+          - { name: menuNote, label: Note at the bottom of the mobile menu, widget: string }
+          - { name: footerNote, label: Footer note, widget: string }
+          - name: socials
+            label: Social profiles
+            widget: list
+            summary: '{{name}}'
+            fields:
+              - { name: label, label: Badge text, widget: string, hint: 'Short text inside the badge, e.g. in' }
+              - { name: name, label: Network, widget: string }
+              - { name: url, label: Profile link, widget: string, required: false, hint: 'Leave empty to show the badge without a link.' }

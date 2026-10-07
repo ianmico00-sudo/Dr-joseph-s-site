@@ -1,0 +1,146 @@
+{
+  "hero": {
+    "eyebrow": "About",
+    "titleStart": "A life devoted to health,",
+    "titleAccent": "justice",
+    "titleEnd": ", and the public good.",
+    "portrait": "/uploads/portrait.jpg"
+  },
+  "bio": [
+    "Dr. Nkurunziza Joseph Ryarasa, MD, is a medical doctor and public health practitioner who has successfully bridged the gap between healthcare and social justice. He earned his medical degree from the National University of Rwanda and advanced his training with postgraduate qualifications in public health and HIV/AIDS care from the University of Roehampton, Antwerp, and UC San Diego.",
+    "His deep commitment to healthcare is reflected in his roles as Clinical Services Director for Drew Cares International and as a Clinical Services Specialist for the DoD/US Embassy Rwanda. He also co-founded and served as Board Director at the Health Development Initiative (HDI) Rwanda, an organization dedicated to improving the health of vulnerable populations.",
+    "His current governance work as the Executive Director of Never Again Rwanda (NAR) stems directly from his medical career. Through his public health practice, he recognized that clinical treatments alone cannot fix health inequities without addressing underlying structural issues. He now applies his healthcare leadership skills to champion good governance, human rights, and accountability as essential pillars for both social justice and a healthier public."
+  ],
+  "facts": [
+    "Kigali, Rwanda",
+    "Executive Director, NAR",
+    "Public Health and Human Rights"
+  ],
+  "roles": {
+    "eyebrow": "Current and Past Roles",
+    "title": "Responsibilities",
+    "accent": "held.",
+    "items": [
+      {
+        "org": "Never Again Rwanda (NAR)",
+        "role": "Co-Founder & Executive Director",
+        "text": "A peacebuilding and social justice organization founded in 2002 in response to the 1994 Genocide against the Tutsi. Promotes peace, social cohesion, human rights, and youth engagement in governance."
+      },
+      {
+        "org": "African Democracy Forum (ADF)",
+        "role": "President",
+        "text": "A regional network of civil society organizations and individuals dedicated to democracy, peace, human rights and development in Africa."
+      },
+      {
+        "org": "Rwanda Civil Society Platform",
+        "role": "Chairperson, Board of Directors",
+        "text": "A coalition advancing citizen participation, accountability, and collective civil society voice in Rwanda."
+      },
+      {
+        "org": "Health Development Initiative (HDI) Rwanda",
+        "role": "Co-Founder & Board Director",
+        "text": "An organization committed to improving the health of disadvantaged populations across Rwanda."
+      },
+      {
+        "org": "Center for Public Health & Development",
+        "role": "Co-Founder & Board Member",
+        "text": "Supporting public health capacity and health systems strengthening."
+      },
+      {
+        "org": "Access to Health Rwanda",
+        "role": "Deputy Legal Representative",
+        "text": "Advancing access to healthcare for vulnerable communities."
+      },
+      {
+        "org": "Drew Cares International",
+        "role": "Clinical Service Director",
+        "text": "Implemented HIV care and treatment programs within the Rwanda Defence Force."
+      },
+      {
+        "org": "DoD HIV/AIDS Prevention Program & US Embassy Rwanda",
+        "role": "Clinical Services Specialist",
+        "text": "Specialist clinical services within the US government health portfolio in Rwanda (2011–2016)."
+      },
+      {
+        "org": "Rwanda Military Hospital",
+        "role": "HIV Clinician",
+        "text": "Four and a half years as an HIV clinician within the military health system."
+      },
+      {
+        "org": "Earth Institute, Columbia University",
+        "role": "Health Coordinator",
+        "text": "Millennium Village Project in Rwanda — health systems coordination."
+      }
+    ]
+  },
+  "awards": {
+    "eyebrow": "Recognition",
+    "title": "Awards and",
+    "accent": "honours.",
+    "items": [
+      {
+        "year": "2010",
+        "title": "JCI TOYP — Ten Outstanding Young Persons of the World",
+        "text": "Awarded by Junior Chambers International at Osaka, Japan."
+      },
+      {
+        "year": "—",
+        "title": "UNV Rwanda Volunteer of the Year Award",
+        "text": "Recognition for service and volunteerism in Rwanda."
+      },
+      {
+        "year": "2021",
+        "title": "Book Chapter — \"Justice and Transformation within Rwanda\"",
+        "text": "Contributed to \"In the Shadow of Genocide\" (Taylor & Francis)."
+      }
+    ]
+  },
+  "education": {
+    "eyebrow": "Education",
+    "title": "Training and",
+    "accent": "qualifications.",
+    "items": [
+      {
+        "school": "National University of Rwanda",
+        "award": "Doctor of Medicine (MD)"
+      },
+      {
+        "school": "University of Roehampton",
+        "award": "Postgraduate — Public Health"
+      },
+      {
+        "school": "Antwerp",
+        "award": "Postgraduate — HIV/AIDS Care"
+      },
+      {
+        "school": "UC San Diego",
+        "award": "Postgraduate — Public Health & HIV/AIDS"
+      }
+    ]
+  },
+  "interests": {
+    "eyebrow": "Areas of Interest",
+    "title": "What drives the",
+    "accent": "work.",
+    "items": [
+      "Health systems and universal coverage",
+      "Good governance and accountability",
+      "Human rights and civic space",
+      "Peacebuilding and reconciliation",
+      "Youth engagement in civic life",
+      "Decentralization and service delivery",
+      "Health financing and equity",
+      "Regional integration in the Great Lakes"
+    ]
+  },
+  "statement": {
+    "eyebrow": "A Personal Statement",
+    "quote": "Clinical treatments alone cannot fix health inequities without addressing underlying structural issues. Good governance, human rights, and accountability are not separate from public health — they are its foundations.",
+    "attribution": "Dr. Joseph Ryarasa Nkurunziza"
+  },
+  "banner": {
+    "title": "Explore the full archive of writings and analysis.",
+    "button": "Read the writings",
+    "image": "/uploads/kigali-dusk.jpg"
+  }
+}

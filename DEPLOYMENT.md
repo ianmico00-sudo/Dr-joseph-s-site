@@ -1,5 +1,12 @@
 # Deployment guide — Render (CMS) + Vercel/Netlify (frontend)
 
+> **Note (October 2026):** the website in `app/` no longer reads from the Strapi CMS.
+> Content is edited at `/admin` on the site (see `app/README.md`), which saves to this
+> GitHub repository; Vercel then rebuilds the site. To deploy: import the repository in
+> Vercel, set **Root Directory** to `app`, and deploy. Optional environment variable:
+> `VITE_WEB3FORMS_KEY` for contact form email. The Strapi/Render steps below are kept
+> for reference only.
+
 This project has two halves that deploy separately:
 
 - **`cms/`** — the Strapi CMS. Deploys to **Render.com** (free web service + free Postgres).
@@ -58,19 +65,27 @@ Render's free web services have no persistent disk — any local file (including
 
 ### 1c. Set environment variables
 
-Under the web service's **Environment** tab, add these. The secret values below were freshly generated for this deployment (not the same ones used in local dev) — copy them exactly as shown, they're meant to be pasted in as-is:
+Under the web service's **Environment** tab, add the variables below. The six secrets (`APP_KEYS`, `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `ENCRYPTION_KEY`) must be values you generate yourself and never commit to Git.
+
+**Generate the secrets on your Mac** (open the **Terminal** app and run this once for each secret; each run prints one value):
+
+```bash
+node -e "console.log(require('crypto').randomBytes(16).toString('base64'))"
+```
+
+For `APP_KEYS`, run it four times and join the four values with commas (no spaces). Paste each value straight into Render's Environment tab.
 
 ```
 NODE_ENV=production
 DATABASE_CLIENT=postgres
 DATABASE_URL=<paste the Internal Database URL from step 1a>
 DATABASE_SSL=false
-APP_KEYS=UCJZ7V4uqRKFaSDs0YMyqg==,OAv9lBJwG462vTZuWA2V/Q==,mLiOa7B4ENMcJ4sRGv+org==,yD+HkZpOtvIzLxT0IqYYfQ==
-API_TOKEN_SALT=EVaYeVjVpUeXZRqBcrnpdg==
-ADMIN_JWT_SECRET=i+dKFpYZPuHl57WmAXuhfw==
-JWT_SECRET=KtFAosq3YFo70TjOAk/qkg==
-TRANSFER_TOKEN_SALT=X/2DKchriS1jhpUF2jN4BA==
-ENCRYPTION_KEY=OyqjHKvTis1UuRukdDkSqA==
+APP_KEYS=<four generated values, comma-separated>
+API_TOKEN_SALT=<generated value>
+ADMIN_JWT_SECRET=<generated value>
+JWT_SECRET=<generated value>
+TRANSFER_TOKEN_SALT=<generated value>
+ENCRYPTION_KEY=<generated value>
 CORS_ORIGINS=http://localhost:5173
 ```
 

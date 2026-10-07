@@ -1,1 +1,146 @@
-@import './styles/base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens — taken from the approved reference design. Colours are HSL
+   triplets so Tailwind can apply opacity (e.g. bg-oxford/10). */
+:root {
+  --background: 204 33% 98%;
+  --foreground: 210 40% 17%;
+  --card: 0 0% 100%;
+  --muted: 204 20% 94%;
+  --border: 210 20% 88%;
+  --oxford: 210 40% 17%; /* navy: text and dark sections */
+  --ochre: 142 52% 40%; /* green accent */
+  --slate: 217 17% 35%; /* secondary text */
+
+  --font-display: 'Jost Variable', 'Jost', 'Century Gothic', CenturyGothic, ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Jost Variable', 'Jost', 'Century Gothic', CenturyGothic, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: hsl(var(--ochre) / 0.3);
+    color: hsl(var(--oxford));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ochre));
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .hairline {
+    border-color: hsl(var(--oxford) / 0.12);
+  }
+
+  .grain {
+    background-image: radial-gradient(hsl(var(--oxford) / 0.025) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  .prose-editorial {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: hsl(var(--oxford) / 0.92);
+  }
+
+  .prose-editorial p {
+    margin-bottom: 1.6rem;
+  }
+
+  .prose-editorial p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-size: 3.6rem;
+    line-height: 0.9;
+    float: left;
+    padding: 0.35rem 0.75rem 0 0;
+    color: hsl(var(--ochre));
+    font-weight: 500;
+  }
+
+  /* Formatting that can be added to an article in the content editor */
+  .prose-editorial h2,
+  .prose-editorial h3 {
+    font-family: var(--font-display);
+    color: hsl(var(--oxford));
+    line-height: 1.25;
+    margin: 2.4rem 0 1rem;
+  }
+
+  .prose-editorial h2 { font-size: 1.75rem; }
+  .prose-editorial h3 { font-size: 1.4rem; }
+
+  .prose-editorial a {
+    border-bottom: 1px solid hsl(var(--oxford) / 0.3);
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .prose-editorial a:hover {
+    color: hsl(var(--ochre));
+    border-color: hsl(var(--ochre));
+  }
+
+  .prose-editorial ul,
+  .prose-editorial ol {
+    margin: 0 0 1.6rem 1.4rem;
+  }
+
+  .prose-editorial ul { list-style: disc; }
+  .prose-editorial ol { list-style: decimal; }
+  .prose-editorial li { margin-bottom: 0.5rem; }
+
+  .prose-editorial blockquote {
+    border-left: 2px solid hsl(var(--ochre));
+    padding-left: 1.25rem;
+    margin: 0 0 1.6rem;
+    font-style: italic;
+  }
+
+  .prose-editorial img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 1.6rem;
+  }
+
+  /* Scroll-in ("pop up") effect. Every animated element uses this one rule so
+     the movement is identical everywhere; <Reveal> adds .is-visible. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal.delay-1 { transition-delay: 0.08s; }
+  .reveal.delay-2 { transition-delay: 0.16s; }
+  .reveal.delay-3 { transition-delay: 0.24s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}

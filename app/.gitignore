@@ -4,3 +4,7 @@ dist
 .env
 .env.production
 .env.local
+
+# Copied from node_modules on every build (see vite.config.js)
+public/admin/sveltia-cms.js
+public/admin/chunks

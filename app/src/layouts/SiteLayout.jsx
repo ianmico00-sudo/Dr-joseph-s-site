@@ -1,23 +1,24 @@
-import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
-import { ProfileProvider } from '../context/ProfileContext.jsx';
 
 export default function SiteLayout() {
   const { pathname } = useLocation();
 
+  // Start every page at the top.
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
 
   return (
-    <ProfileProvider>
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main>
+      {/* key restarts the scroll-in effects on each page */}
+      <main key={pathname} className="flex-1">
         <Outlet />
       </main>
       <Footer />
-    </ProfileProvider>
+    </div>
   );
 }

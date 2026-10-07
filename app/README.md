@@ -1,71 +1,119 @@
 # Dr. Joseph Ryarasa Nkurunziza — personal website
 
-A React (Vite) rebuild of the approved design, matching its layout, colors, and typography.
-Content (bio, articles, media appearances, timeline, pillars) is served by a headless
-Strapi CMS in the sibling `cms/` folder — see **`../DEPLOYMENT.md`** for how the two
-deploy together to Strapi Cloud + Vercel/Netlify. If the CMS is ever unreachable, the
-site falls back to built-in placeholder content automatically, so it never breaks or
-shows blank sections.
+A React (Vite) site that reproduces the approved reference design
+(`dr-joseph-ryarasa-nkurunziza-copy-3baba1cc.base44.app`): same layout, colours, Jost
+typeface, scroll-in effects and hover effects.
 
-## What's built
+## Pages
 
-- **Home page** — fully built: hero, bio ("The Bridge"), the 6-section explore grid,
-  featured writings, Pillars of Impact, the career timeline, media appearances, and the
-  contact call-to-action band — all using the real copy from the approved design.
-- **Header & footer** — shared across every page, with a working mobile menu.
-- **Contact page** (`/contact`) — a real, validated message form. It is **UI-only for
-  now**: submitting shows a success message but does not actually send an email. See
-  "Wiring up the contact form" below.
-- **Placeholder pages** for About, Insights, Analysis, Reflections, Media & Conversations,
-  In the News, and From My Library — styled consistently so navigation works everywhere,
-  each with a short one-line description of what will go there. These are meant to be
-  filled in next, page by page.
+| Address | Page |
+| --- | --- |
+| `/` | Home |
+| `/about` | About |
+| `/insights`, `/analysis`, `/reflections` | Article listings with search and topic filters |
+| `/articles/<slug>` | A single article |
+| `/media` | Media & Conversations |
+| `/in-the-news` | In the News |
+| `/library` | From My Library |
+| `/contact` | Contact & Engagement |
 
-## Design tokens
+Addresses from the earlier build (`/media-conversations`, `/from-my-library`,
+`/insights/<slug>`) redirect to the new ones.
 
-Colors and the font were sampled directly from the approved screenshots:
+## Editing content (the content editor)
 
-- Background: `#f9fafc` · Navy (text/dark sections): `#1e2b3b` · Green accent: `#52995f`
-- Font: Google Font "Nunito" (weights 300–800), loaded in `index.html`
-- All tokens live in `src/styles/variables.css`
+The site has a content editor at **`/admin`** (for example
+`https://your-site.vercel.app/admin`). It is [Sveltia CMS](https://sveltiacms.app), a
+Git-based editor: pressing Save commits the change to the GitHub repository, Vercel
+notices the commit and rebuilds the site, and the change is live about a minute later.
+There is no separate server or database.
+
+What can be edited there:
+
+| In the editor | File it changes |
+| --- | --- |
+| Articles | `src/content/articles/<address>.md` (one file per article) |
+| Media, news and library | `src/content/media.json`, `src/content/library.json` |
+| Page text and photos → Home page | `src/content/home.json` |
+| Page text and photos → About page | `src/content/about.json` |
+| Page text and photos → Other page introductions | `src/content/pages.json` |
+| Site details | `src/content/site.json` |
+| Uploaded photos | `public/uploads/` |
+
+Signing in needs a GitHub access token for the repository:
+
+1. On github.com: profile photo → Settings → Developer settings → Personal access
+   tokens → Fine-grained tokens → Generate new token.
+2. Repository access: "Only select repositories" → `Dr-joseph-s-site`.
+3. Permissions → Repository permissions → **Contents: Read and write**.
+4. Generate, copy the token, open `/admin`, choose "Sign In Using Access Token" and
+   paste it. The browser remembers it; keep the token private.
+
+The editor's settings (which fields exist, their labels) are in
+`public/admin/config.yml`. The repository name and branch at the top of that file must
+match the GitHub repository the site is deployed from.
+
+Notes:
+
+- An article's address comes from its file name, which the editor creates from the
+  title when the article is first saved. Changing the title later does not change the
+  address.
+- Article text is Markdown, so headings, bold, links, lists and quotes can be used.
+- The three newest articles appear on the homepage automatically, as do the three
+  newest dated media items.
+- The editor has not yet been tested against the live GitHub repository; the first
+  sign-in and save after deployment is that test.
+
+The Strapi CMS in `../cms` is not used by this version of the site.
+
+## Design
+
+Tailwind CSS. Colours and fonts are defined once in `src/index.css` (the `:root` block)
+and exposed to Tailwind in `tailwind.config.js`:
+
+- Background `hsl(204 33% 98%)` · Navy "oxford" `hsl(210 40% 17%)` · Green "ochre"
+  `hsl(142 52% 40%)` · Secondary text "slate" `hsl(217 17% 35%)`
+- Font: Jost (self-hosted through `@fontsource-variable/jost`)
+
+Effects are shared so they behave the same everywhere:
+
+- **Scroll-in ("pop up")** — the `<Reveal>` component (`src/components/Reveal.jsx`) and
+  the `.reveal` rules in `src/index.css`. Neighbouring items are staggered with `delay`.
+- **Card hover** — a border/colour change over 500ms on every card; no card moves or
+  resizes, so rows stay aligned.
+
+## Images
+
+`public/uploads/` holds `portrait.jpg`, `community.jpg` and `kigali-dusk.jpg`. These were
+cropped from screenshots of the design and are low quality. Replace them by uploading the
+original photos in the editor (Page text and photos → Home page / About page).
+
+## Contact form email
+
+The form sends through [Web3Forms](https://web3forms.com), which needs no server.
+
+1. On web3forms.com, create a free access key using the inbox that should receive
+   messages (for example `engagement@josephryarasa.rw`).
+2. Copy `.env.example` to `.env` and paste the key after `VITE_WEB3FORMS_KEY=`.
+3. On the hosting platform (Vercel/Netlify), add the same variable, then redeploy.
+
+Until a key is set, pressing "Send Message" opens the visitor's own email app with the
+message filled in. The Web3Forms sending path has not been tested with a real key yet.
 
 ## Running locally
 
 ```bash
 npm install
-cp .env.example .env    # points the app at a local Strapi instance (see cms/)
-npm run dev              # starts a local dev server, prints a URL to open
+npm run dev      # prints a local address to open in the browser
 ```
 
-Start the CMS too (`cd ../cms && npm run develop`) if you want live content — otherwise
-the site runs fine on its own bundled fallback content.
-
-## Building for production
+## Building
 
 ```bash
-npm run build      # outputs a static site to dist/
-npm run preview    # optional: serve dist/ locally to double-check the build
+npm run build    # static site in dist/
+npm run preview  # serve dist/ locally to check it
+npm run lint
 ```
 
-## Deploying
-
-The current plan is a managed-cloud UAT setup: this app on **Vercel or Netlify**, CMS
-on **Strapi Cloud**. Full walkthrough in **`../DEPLOYMENT.md`**. `vercel.json` and
-`public/_redirects` are already included so client-side routing (React Router) works
-correctly on either platform — no extra config needed there.
-
-`public/.htaccess` is also still included in case a cPanel/Apache static deploy is ever
-used instead — `npm run build` produces a fully static site in `dist/`, and uploading
-its contents plus `.htaccess` works the same way as before.
-
-## Wiring up the contact form
-
-`src/pages/Contact.jsx` has a `handleSubmit` function with a comment marking where to
-add the real send logic — the same place the Microsoft Graph mailer pattern used on the
-main NAR site would plug in, or any other form backend/API route.
-
-## Next steps
-
-Build out the placeholder pages with real content, one at a time — the pattern in
-`src/pages/PageStub.jsx` can either be extended or replaced per page as content is
-ready.
+`vercel.json`, `public/_redirects` and `public/.htaccess` keep page addresses working on
+Vercel, Netlify and Apache/cPanel respectively.

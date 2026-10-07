@@ -1,137 +1,218 @@
 import { useState } from 'react';
-import { useProfile } from '../context/ProfileContext.jsx';
-import './Contact.css';
+import { ArrowRight, Calendar, Mail, MapPin } from 'lucide-react';
+import PageHero from '../components/PageHero.jsx';
+import Reveal from '../components/Reveal.jsx';
+import { SITE } from '../lib/site.js';
+import pages from '../content/pages.json';
+import { emailSendingConfigured, mailtoLink, sendContactMessage } from '../lib/contact.js';
 
-const reasons = [
-  'Collaboration',
-  'Speaking engagement',
-  'Media inquiry',
-  'Academic partnership',
-  'Other',
-];
+const { purposes: PURPOSES, ...HERO } = pages.contact;
 
-const initialForm = { name: '', email: '', reason: reasons[0], message: '' };
+const EMPTY = { name: '', email: '', purpose: PURPOSES[0], message: '', botcheck: '' };
+const LABEL = 'block text-[11px] tracking-[0.2em] uppercase text-slate font-medium mb-3';
+const FIELD =
+  'w-full bg-transparent border-0 border-b hairline focus:border-ochre focus:outline-none py-2.5 text-oxford placeholder:text-slate/60 transition-colors';
+const ERROR = 'mt-2 text-sm text-red-700';
 
 export default function Contact() {
-  const { profile } = useProfile();
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState(EMPTY);
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  // idle | sending | sent | failed
+  const [status, setStatus] = useState('idle');
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const validate = () => {
     const next = {};
     if (!form.name.trim()) next.name = 'Please enter your name.';
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = 'Please enter a valid email.';
-    if (!form.message.trim()) next.message = 'Please add a short message.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) next.email = 'Please enter a valid email address.';
+    if (!form.message.trim()) next.message = 'Please write a short message.';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-    // NOTE for developer: this form is UI-only for now — no message is actually
-    // sent. Wire this up to a mail service (e.g. Microsoft Graph, like the main
-    // Never Again Rwanda site) or a form backend before launch.
-    setSubmitted(true);
+
+    if (!emailSendingConfigured) {
+      // No email service set up yet: hand the message to the visitor's email app.
+      window.location.href = mailtoLink(SITE.email, form);
+      return;
+    }
+
+    setStatus('sending');
+    try {
+      await sendContactMessage(form);
+      setStatus('sent');
+      setForm(EMPTY);
+    } catch {
+      setStatus('failed');
+    }
   };
 
   return (
-    <section className="contact-page dot-grid-bg">
-      <div className="container contact-page__grid">
-        <div className="contact-page__intro">
-          <p className="eyebrow">Contact &amp; Engagement</p>
-          <h1 className="section-heading">
-            Let&rsquo;s work together to move <span className="accent">health and justice</span>{' '}
-            forward.
-          </h1>
-          <hr className="section-rule" />
-          <p className="section-sub">
-            For collaboration, speaking engagements, media inquiries, or academic partnerships —
-            send a message and I&rsquo;ll get back to you.
-          </p>
+    <>
+      <PageHero {...HERO} />
 
-          <dl className="contact-page__details">
-            <div>
-              <dt>Email</dt>
-              <dd>
-                <a href={`mailto:${profile.contactEmail}`}>{profile.contactEmail}</a>
-              </dd>
-            </div>
-            <div>
-              <dt>Based in</dt>
-              <dd>Kigali, Rwanda</dd>
-            </div>
-          </dl>
+      <section className="pb-24 md:pb-32 bg-background">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-7">
+            <Reveal>
+              {status === 'sent' ? (
+                <div className="border hairline bg-muted/30 p-8 md:p-10" role="status">
+                  <h2 className="font-display text-3xl text-oxford">Message sent.</h2>
+                  <p className="mt-4 text-slate leading-relaxed">Thank you for reaching out. You will receive a reply by email.</p>
+                  <button
+                    type="button"
+                    onClick={() => setStatus('idle')}
+                    className="mt-6 py-2 text-sm text-oxford border-b border-oxford/30 hover:border-ochre hover:text-ochre transition-colors"
+                  >
+                    Send another message
+                  </button>
+                </div>
+              ) : (
+                <form className="space-y-8" onSubmit={handleSubmit} noValidate>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <label htmlFor="contact-name" className={LABEL}>
+                        Full Name
+                      </label>
+                      <input
+                        id="contact-name"
+                        name="name"
+                        autoComplete="name"
+                        className={FIELD}
+                        placeholder="Your name"
+                        value={form.name}
+                        onChange={update('name')}
+                        aria-invalid={Boolean(errors.name)}
+                      />
+                      {errors.name && <p className={ERROR}>{errors.name}</p>}
+                    </div>
+                    <div>
+                      <label htmlFor="contact-email" className={LABEL}>
+                        Email
+                      </label>
+                      <input
+                        id="contact-email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        className={FIELD}
+                        placeholder="you@email.com"
+                        value={form.email}
+                        onChange={update('email')}
+                        aria-invalid={Boolean(errors.email)}
+                      />
+                      {errors.email && <p className={ERROR}>{errors.email}</p>}
+                    </div>
+                  </div>
+
+                  <fieldset>
+                    <legend className={`${LABEL} mb-4`}>Purpose of Inquiry</legend>
+                    <div className="flex flex-wrap gap-2.5">
+                      {PURPOSES.map((purpose) => (
+                        <button
+                          key={purpose}
+                          type="button"
+                          aria-pressed={form.purpose === purpose}
+                          onClick={() => setForm((f) => ({ ...f, purpose }))}
+                          className={`px-4 py-2.5 min-h-[44px] text-sm border transition-colors duration-300 ${
+                            form.purpose === purpose
+                              ? 'border-ochre bg-ochre/10 text-oxford'
+                              : 'hairline text-oxford/80 hover:border-ochre/50'
+                          }`}
+                        >
+                          {purpose}
+                        </button>
+                      ))}
+                    </div>
+                  </fieldset>
+
+                  <div>
+                    <label htmlFor="contact-message" className={LABEL}>
+                      Message
+                    </label>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      rows={5}
+                      className={`${FIELD} resize-none`}
+                      placeholder="Share the details of your inquiry…"
+                      value={form.message}
+                      onChange={update('message')}
+                      aria-invalid={Boolean(errors.message)}
+                    />
+                    {errors.message && <p className={ERROR}>{errors.message}</p>}
+                  </div>
+
+                  {/* Hidden field that only spam bots fill in */}
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    className="hidden"
+                    checked={Boolean(form.botcheck)}
+                    onChange={(e) => setForm((f) => ({ ...f, botcheck: e.target.checked ? 'on' : '' }))}
+                  />
+
+                  {status === 'failed' && (
+                    <p className={ERROR} role="alert">
+                      Your message could not be sent. Please try again, or email{' '}
+                      <a href={`mailto:${SITE.email}`} className="underline">
+                        {SITE.email}
+                      </a>{' '}
+                      directly.
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="group inline-flex items-center gap-3 bg-oxford text-background px-8 py-4 hover:bg-ochre transition-colors disabled:opacity-60"
+                  >
+                    <span className="text-sm tracking-wide font-medium">{status === 'sending' ? 'Sending…' : 'Send Message'}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </button>
+                </form>
+              )}
+            </Reveal>
+          </div>
+
+          <div className="lg:col-span-4 lg:col-start-9">
+            <Reveal delay={1} className="border hairline bg-muted/30 p-8 md:p-9">
+              <div className="text-[11px] tracking-[0.3em] uppercase text-slate font-medium mb-6">Direct Channels</div>
+              <div className="space-y-6">
+                <div className="flex items-start gap-3">
+                  <Mail className="w-4 h-4 text-ochre mt-1 shrink-0" aria-hidden="true" />
+                  <div>
+                    <div className="text-sm text-oxford font-medium">Email</div>
+                    <a href={`mailto:${SITE.email}`} className="text-sm text-slate hover:text-ochre transition-colors break-all">
+                      {SITE.email}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-4 h-4 text-ochre mt-1 shrink-0" aria-hidden="true" />
+                  <div>
+                    <div className="text-sm text-oxford font-medium">Location</div>
+                    <div className="text-sm text-slate">{SITE.location}</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Calendar className="w-4 h-4 text-ochre mt-1 shrink-0" aria-hidden="true" />
+                  <div>
+                    <div className="text-sm text-oxford font-medium">Availability</div>
+                    <div className="text-sm text-slate">{SITE.availability}</div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
-
-        <div className="contact-page__form-wrap">
-          {submitted ? (
-            <div className="contact-success">
-              <h2>Message received.</h2>
-              <p>Thank you for reaching out — I&rsquo;ll get back to you as soon as I can.</p>
-              <button type="button" className="btn btn-text" onClick={() => { setForm(initialForm); setSubmitted(false); }}>
-                Send another message
-              </button>
-            </div>
-          ) : (
-            <form className="contact-form" onSubmit={handleSubmit} noValidate>
-              <div className="contact-form__row">
-                <label htmlFor="name">Full name</label>
-                <input
-                  id="name"
-                  type="text"
-                  value={form.name}
-                  onChange={update('name')}
-                  aria-invalid={Boolean(errors.name)}
-                />
-                {errors.name && <p className="contact-form__error">{errors.name}</p>}
-              </div>
-
-              <div className="contact-form__row">
-                <label htmlFor="email">Email address</label>
-                <input
-                  id="email"
-                  type="email"
-                  value={form.email}
-                  onChange={update('email')}
-                  aria-invalid={Boolean(errors.email)}
-                />
-                {errors.email && <p className="contact-form__error">{errors.email}</p>}
-              </div>
-
-              <div className="contact-form__row">
-                <label htmlFor="reason">Reason for contact</label>
-                <select id="reason" value={form.reason} onChange={update('reason')}>
-                  {reasons.map((r) => (
-                    <option key={r} value={r}>
-                      {r}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="contact-form__row">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  value={form.message}
-                  onChange={update('message')}
-                  aria-invalid={Boolean(errors.message)}
-                />
-                {errors.message && <p className="contact-form__error">{errors.message}</p>}
-              </div>
-
-              <button type="submit" className="btn btn-accent contact-form__submit">
-                Send Message
-              </button>
-            </form>
-          )}
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
