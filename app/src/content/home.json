@@ -11,8 +11,9 @@
       "Peacebuilder"
     ],
     "lede": "A medical doctor and public health practitioner who has bridged the gap between healthcare and social justice — applying clinical leadership to champion good governance, human rights, and accountability as essential pillars of a healthier public.",
-    "portrait": "/uploads/portrait.jpg",
-    "portraitCaption": "Kigali · Rwanda"
+"portrait": "/uploads/portrait.jpg",
+"portraits": ["/uploads/portrait.jpg"],
+"portraitCaption": "Kigali · Rwanda"
   },
   "bridge": {
     "eyebrow": "The Bridge",
