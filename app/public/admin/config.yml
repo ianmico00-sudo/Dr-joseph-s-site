@@ -119,7 +119,13 @@ collections:
               - { name: nameAccent, label: Name line 3 (green), widget: string }
               - { name: roles, label: Rotating roles, widget: list, field: { name: role, label: Role, widget: string } }
               - { name: lede, label: Introduction, widget: text }
-              - { name: portrait, label: Portrait photo, widget: image }
+                            - name: portraits
+                label: Portrait photos (slideshow)
+                widget: list
+                label_singular: Photo
+                hint: 'Add multiple photos of Dr. Joseph — they cycle automatically on the homepage. First photo is shown by default.'
+                field: { name: photo, label: Photo, widget: image }
+              - { name: portrait, label: Portrait photo (legacy fallback), widget: image, required: false, hint: 'Only used if no photos are added above.' }
               - { name: portraitCaption, label: Photo caption, widget: string }
           - name: bridge
             label: The Bridge (biography)
